@@ -1,0 +1,11 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "north": "cryonic:block/fridge_front",
+        "south": "cryonic:block/fridge_side",
+        "east": "cryonic:block/fridge_side",
+        "west": "cryonic:block/fridge_side",
+        "up": "cryonic:block/fridge_top",
+        "down": "cryonic:block/fridge_bottom"
+    }
+}

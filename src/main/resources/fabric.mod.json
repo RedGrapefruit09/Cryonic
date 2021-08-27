@@ -1,0 +1,35 @@
+{
+    "schemaVersion": 1,
+    "id": "cryonic",
+    "version": "1.0.0",
+    "name": "Cryonic",
+    "description": "Cryonic is a Croptopia & Dehydration plugin which makes food a bit more realistic",
+    "authors": [
+        "RedGrapefruit09"
+    ],
+    "contact": {
+        "repo": "https://github.com/RedGrapefruit09/Cryonic"
+    },
+    "license": "MIT",
+    "icon": "assets/cryonic/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "client": [
+            "com.redgrapefruit.cryonic.client.CryonicClient"
+        ],
+        "main": [
+            "com.redgrapefruit.cryonic.Cryonic"
+        ]
+    },
+    "mixins": [
+        "cryonic.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=0.11.6",
+        "fabric": "*",
+        "minecraft": "1.17.1",
+        "croptopia": ">=1.6.1",
+        "dehydration": ">=1.2.1",
+        "patchouli": "*"
+    }
+}

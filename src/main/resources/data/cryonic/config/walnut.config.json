@@ -1,0 +1,8 @@
+{
+    "parent": "edible_3",
+    "category": "nut",
+    "overdueSpeed": 7,
+    "overdueState": 157500,
+    "fridgeEfficiency": 3,
+    "saltEfficiency": 1
+}

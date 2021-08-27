@@ -1,0 +1,16 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "com.redgrapefruit.cryonic.mixin",
+    "compatibilityLevel": "JAVA_16",
+    "mixins": [
+        "ItemAccessor",
+        "ItemDrinkMixin",
+        "ItemFoodMixin"
+    ],
+    "client": [
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}
