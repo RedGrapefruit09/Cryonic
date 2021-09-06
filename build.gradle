@@ -12,7 +12,7 @@ repositories {
         url = "https://maven.shedaniel.me"
     }
     maven {
-        url = "https://raw.githubusercontent.com/RedGrapefruit09/Maven/master"
+        url = "https://redgrapefruit09.github.io/maven"
         content {
             includeGroup "com.redgrapefruit.itemnbt"
             includeGroup "com.redgrapefruit.redmenu"
