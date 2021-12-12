@@ -6,6 +6,7 @@ import com.redgrapefruit.cryonic.RANDOM
 import com.redgrapefruit.cryonic.core.*
 import com.redgrapefruit.cryonic.mixin.ItemAccessor
 import com.redgrapefruit.cryonic.util.*
+import com.redgrapefruit.itemnbt3.DataClient
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.Entity
 import net.minecraft.entity.effect.StatusEffectInstance
@@ -68,7 +69,9 @@ open class AdvancedFoodItem : Item {
         super.inventoryTick(stack, world, entity, slot, selected)
 
         if (entity is PlayerEntity && !overrideEffects) {
-            RealismEngine.updateFood(config, FoodProfile[stack], entity, slot, world, rottenVariant, overdueVariant, isSalt)
+            DataClient.use(::FoodProfile, stack) { profile ->
+                RealismEngine.updateFood(config, profile, entity, slot, world, rottenVariant, overdueVariant, isSalt)
+            }
         }
     }
 
@@ -80,7 +83,9 @@ open class AdvancedFoodItem : Item {
     ) {
         super.appendTooltip(stack, world, tooltip, context)
 
-        RealismEngine.renderFoodTooltip(tooltip, config, FoodProfile[stack], state)
+        DataClient.use(::FoodProfile, stack) { profile ->
+            RealismEngine.renderFoodTooltip(tooltip, config, profile, state)
+        }
     }
 
     // <---- COMPONENTS ---->

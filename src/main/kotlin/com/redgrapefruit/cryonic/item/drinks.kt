@@ -4,6 +4,7 @@ import com.redgrapefruit.cryonic.GROUP
 import com.redgrapefruit.cryonic.core.DrinkProfile
 import com.redgrapefruit.cryonic.core.RealismEngine
 import com.redgrapefruit.cryonic.util.BlockingOverride
+import com.redgrapefruit.itemnbt3.DataClient
 import net.dehydration.api.DrinkItem
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.Entity
@@ -27,8 +28,11 @@ open class AdvancedDrinkItem(
     override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
         super.inventoryTick(stack, world, entity, slot, selected)
 
-        if (entity is PlayerEntity)
-            RealismEngine.updateDrink(DrinkProfile[stack], rancidSpeed, rancidState, slot, world, entity, rancidVariant)
+        if (entity is PlayerEntity) {
+            DataClient.use(::DrinkProfile, stack) { profile ->
+                RealismEngine.updateDrink(profile, rancidSpeed, rancidState, slot, world, entity, rancidVariant)
+            }
+        }
     }
 
     override fun appendTooltip(
@@ -39,7 +43,9 @@ open class AdvancedDrinkItem(
     ) {
         super.appendTooltip(stack, world, tooltip, context)
 
-        RealismEngine.renderDrinkTooltip(tooltip, DrinkProfile[stack], rancidState)
+        DataClient.use(::DrinkProfile, stack) { profile ->
+            RealismEngine.renderDrinkTooltip(tooltip, profile, rancidState)
+        }
     }
 }
 
@@ -50,6 +56,8 @@ class RancidDrinkItem(internal val component: FoodComponent, rancidSpeed: Int, r
     override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) = Unit
 
     override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
-        RealismEngine.renderDrinkTooltip(tooltip, DrinkProfile[stack], rancidState, true)
+        DataClient.use(::DrinkProfile, stack) { profile ->
+            RealismEngine.renderDrinkTooltip(tooltip, profile, rancidState, true)
+        }
     }
 }

@@ -2,7 +2,7 @@ package com.redgrapefruit.cryonic.block.entity
 
 import com.redgrapefruit.cryonic.registry.BlockRegistry
 import com.redgrapefruit.cryonic.screen.handler.FridgeScreenHandler
-import com.redgrapefruit.redmenu.redmenu.MenuBlockEntity
+import com.redgrapefruit.redmenu.redmenu.standard.MenuBlockEntity
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity

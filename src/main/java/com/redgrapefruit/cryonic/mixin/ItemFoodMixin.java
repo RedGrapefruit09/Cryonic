@@ -4,6 +4,7 @@ import com.redgrapefruit.cryonic.core.*;
 import com.redgrapefruit.cryonic.item.OverdueFoodItem;
 import com.redgrapefruit.cryonic.item.RottenFoodItem;
 import com.redgrapefruit.cryonic.util.*;
+import com.redgrapefruit.itemnbt3.DataClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -52,7 +53,9 @@ public class ItemFoodMixin implements ItemFoodMixinAccess {
 
         //noinspection ConstantConditions
         if (entity instanceof PlayerEntity) {
-            RealismEngine.INSTANCE.updateFood(cryonic$supplierConfig.get(), FoodProfile.Companion.get(stack), (PlayerEntity) entity, slot, world, cryonic$rottenVariant, cryonic$overdueVariant, false);
+            DataClient.use(FoodProfile::new, stack, profile -> {
+                RealismEngine.INSTANCE.updateFood(cryonic$supplierConfig.get(), profile, (PlayerEntity) entity, slot, world, cryonic$rottenVariant, cryonic$overdueVariant, false);
+            });
         }
     }
 
@@ -60,7 +63,9 @@ public class ItemFoodMixin implements ItemFoodMixinAccess {
     private void cryonic$appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context, CallbackInfo ci) {
         if (!cryonic$isActivated || cryonic$supplierConfig.get() == FoodConfig.Companion.getDefault()) return;
 
-        RealismEngine.INSTANCE.renderFoodTooltip(tooltip, cryonic$supplierConfig.get(), FoodProfile.Companion.get(stack), FoodState.FRESH);
+        DataClient.use(FoodProfile::new, stack, profile -> {
+            RealismEngine.INSTANCE.renderFoodTooltip(tooltip, cryonic$supplierConfig.get(), profile, FoodState.FRESH);
+        });
     }
 
     /**

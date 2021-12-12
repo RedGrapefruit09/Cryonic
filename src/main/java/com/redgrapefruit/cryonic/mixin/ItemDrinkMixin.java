@@ -5,6 +5,7 @@ import com.redgrapefruit.cryonic.core.DrinkProfile;
 import com.redgrapefruit.cryonic.core.RealismEngine;
 import com.redgrapefruit.cryonic.item.RancidDrinkItem;
 import com.redgrapefruit.cryonic.util.ItemDrinkMixinAccess;
+import com.redgrapefruit.itemnbt3.DataClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -46,7 +47,9 @@ public class ItemDrinkMixin implements ItemDrinkMixinAccess {
         if (cryonic$invalid()) return;
 
         if (entity instanceof PlayerEntity) {
-            RealismEngine.INSTANCE.updateDrink(DrinkProfile.Companion.get(stack), cryonic$rancidSpeed, cryonic$rancidState, slot, world, (PlayerEntity) entity, cryonic$rancidVariant);
+            DataClient.use(DrinkProfile::new, stack, profile -> {
+                RealismEngine.INSTANCE.updateDrink(profile, cryonic$rancidSpeed, cryonic$rancidState, slot, world, (PlayerEntity) entity, cryonic$rancidVariant);
+            });
         }
     }
 
@@ -54,7 +57,9 @@ public class ItemDrinkMixin implements ItemDrinkMixinAccess {
     private void cryonic$appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context, CallbackInfo ci) {
         if (cryonic$invalid()) return;
 
-        RealismEngine.INSTANCE.renderDrinkTooltip(tooltip, DrinkProfile.Companion.get(stack), cryonic$rancidState, false);
+        DataClient.use(DrinkProfile::new, stack, profile -> {
+            RealismEngine.INSTANCE.renderDrinkTooltip(tooltip, profile, cryonic$rancidState, false);
+        });
     }
 
     private boolean cryonic$invalid() {

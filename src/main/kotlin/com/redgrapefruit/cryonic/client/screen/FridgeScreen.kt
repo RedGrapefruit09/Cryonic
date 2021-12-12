@@ -1,7 +1,7 @@
 package com.redgrapefruit.cryonic.client.screen
 
 import com.redgrapefruit.cryonic.MOD_ID
-import com.redgrapefruit.redmenu.redmenu.MenuScreen
+import com.redgrapefruit.redmenu.redmenu.standard.MenuScreen
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.text.Text

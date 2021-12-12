@@ -6,7 +6,8 @@ import com.redgrapefruit.cryonic.core.FridgeState
 import com.redgrapefruit.cryonic.item.AdvancedFoodItem
 import com.redgrapefruit.cryonic.registry.ScreenHandlerRegistry
 import com.redgrapefruit.cryonic.util.ItemFoodMixinAccess
-import com.redgrapefruit.redmenu.redmenu.MenuScreenHandler
+import com.redgrapefruit.itemnbt3.DataClient
+import com.redgrapefruit.redmenu.redmenu.standard.MenuScreenHandler
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.SimpleInventory
@@ -63,18 +64,19 @@ class FridgeScreenHandlerListener : ScreenHandlerListener {
         // If the current item is a food item, set its fridge state to inside the fridge
         // Repeat for both food implementations (RFoodItem and ItemMixin)
         // For the mixin implementation, make sure that the item is activated
-        val profile = FoodProfile[stack]
-        if (currentItem is AdvancedFoodItem) {
-            profile.fridgeState = FridgeState.IN_FRIDGE
-        }
-        if (previousItem is AdvancedFoodItem) {
-            profile.fridgeState = FridgeState.NOT_COMPENSATED
-        }
-        if (currentItem is ItemFoodMixinAccess && currentItem.isFoodActivated()) {
-            profile.fridgeState = FridgeState.IN_FRIDGE
-        }
-        if (previousItem is ItemFoodMixinAccess && previousItem.isFoodActivated()) {
-            profile.fridgeState = FridgeState.NOT_COMPENSATED
+        DataClient.use(::FoodProfile, stack) { profile ->
+            if (currentItem is AdvancedFoodItem) {
+                profile.fridgeState = FridgeState.IN_FRIDGE
+            }
+            if (previousItem is AdvancedFoodItem) {
+                profile.fridgeState = FridgeState.NOT_COMPENSATED
+            }
+            if (currentItem is ItemFoodMixinAccess && currentItem.isFoodActivated()) {
+                profile.fridgeState = FridgeState.IN_FRIDGE
+            }
+            if (previousItem is ItemFoodMixinAccess && previousItem.isFoodActivated()) {
+                profile.fridgeState = FridgeState.NOT_COMPENSATED
+            }
         }
     }
 

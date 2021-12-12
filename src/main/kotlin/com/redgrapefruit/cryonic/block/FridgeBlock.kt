@@ -1,7 +1,7 @@
 package com.redgrapefruit.cryonic.block
 
 import com.redgrapefruit.cryonic.block.entity.FridgeBlockEntity
-import com.redgrapefruit.redmenu.redmenu.MenuBlock
+import com.redgrapefruit.redmenu.redmenu.standard.MenuBlock
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.inventory.Inventory

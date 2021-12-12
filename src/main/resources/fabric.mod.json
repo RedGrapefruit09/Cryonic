@@ -25,11 +25,11 @@
         "cryonic.mixins.json"
     ],
     "depends": {
-        "fabricloader": ">=0.11.6",
+        "fabricloader": ">=0.12.11",
         "fabric": "*",
-        "minecraft": "1.17.1",
+        "minecraft": "1.18.1",
         "croptopia": ">=1.6.1",
-        "dehydration": ">=1.2.1",
+        "dehydration": ">=1.2.5",
         "patchouli": "*"
     }
 }
